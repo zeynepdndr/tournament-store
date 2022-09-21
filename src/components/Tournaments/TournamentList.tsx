@@ -39,6 +39,7 @@ const TournamentList: React.FC<TournamentListProps> = ({
   >([]);
 
   const fetchTournaments = () => {
+    console.log('jhh');
     dispatch(fetchTournamentsFromAPI());
   };
   const editTournamentHandler = (item: any) => {

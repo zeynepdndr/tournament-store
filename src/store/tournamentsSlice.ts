@@ -19,9 +19,10 @@ const initialState: TournamentState = {
 export const fetchTournamentsFromAPI = createAsyncThunk(
   'tournaments/getTournaments',
   async () => {
-    const response = await fetch(API_TOURNAMENTS_URL, { method: 'GET' }).then(
-      (response) => response.json()
-    );
+    const response = await fetch(API_TOURNAMENTS_URL, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }).then((response) => response.json());
     return response;
   }
 );
@@ -31,6 +32,7 @@ export const addTournamentWithAPI = createAsyncThunk(
   async (enteredTournamentName: string) => {
     const response = await fetch(API_TOURNAMENTS_URL, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: enteredTournamentName }),
     }).then((response) => response.json());
     return response;
@@ -42,6 +44,7 @@ export const deleteTournamentWithAPI = createAsyncThunk(
   async (enteredTournamentId: string) => {
     await fetch(`${API_TOURNAMENTS_URL}/${enteredTournamentId}`, {
       method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
     }).then((response) => response.json());
     return enteredTournamentId;
   }
@@ -52,6 +55,7 @@ export const editTournamentWithAPI = createAsyncThunk(
     const { id, name } = updatedTournament;
     const response = await fetch(`${API_TOURNAMENTS_URL}/${id}`, {
       method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name }),
     }).then((response) => response.json());
     return response;
